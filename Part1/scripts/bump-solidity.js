@@ -1,7 +1,13 @@
-const fs = require("fs");
+const fs = require('fs')
 const solidityRegex = /pragma solidity \^\d+\.\d+\.\d+/
+const verifierRegex = /contract Verifier/
 
-let content = fs.readFileSync("./contracts/verifier.sol", { encoding: 'utf-8' });
-let bumped = content.replace(solidityRegex, 'pragma solidity ^0.8.0');
+const contracts = ['Verifier', 'Check']
 
-fs.writeFileSync("./contracts/verifier.sol", bumped);
+contracts.forEach((e) => {
+  const content = fs.readFileSync(`./contracts/${e}.sol`, { encoding: 'utf-8' })
+  let bumped = content.replace(solidityRegex, 'pragma solidity ^0.8.0')
+  bumped = bumped.replace(verifierRegex, `contract ${e}`)
+
+  fs.writeFileSync(`./contracts/${e}.sol`, bumped)
+})
