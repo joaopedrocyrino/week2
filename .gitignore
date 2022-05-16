@@ -7,3 +7,12 @@ typechain
 #Hardhat files
 cache
 artifacts
+
+*.sym
+*.r1cs
+*.zkey
+*.ptau
+*.wasm
+generate_witness.js
+witness_calculator.js
+verification_key.json
